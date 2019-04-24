@@ -1,11 +1,9 @@
 version: "3"
 services:
     www:
-        image: php:apache
+        build: .
         ports: 
-            - "8080:80"
-        volumes:
-            - .:/var/www/html
+            - "80:80"
         links:
             - db
     db:
@@ -14,6 +12,7 @@ services:
             - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: blog
         volumes:
             - persistent:/var/lib/mysql
     phpmyadmin:
